@@ -1,0 +1,41 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}
+	Création d'article
+{% endblock %}
+
+{% block body %}
+	<div id="layoutSidenav_content">
+		<main>
+			<div class="container-fluid px-4">
+				<h1 class="mt-4">Liste d'articles</h1>
+				<ol class="breadcrumb mb-4">
+					<li class="breadcrumb-item">
+						<a href="#">Liste d'articles</a>
+					</li>
+					<li class="breadcrumb-item active">Static Navigation</li>
+				</ol>
+
+                <div class="row">
+                    {% for article in articles %}
+                    <div class="col-4" style="margin-bottom: 20px; min-height: 500px">
+                        <div class="card h-100">
+                            {% if article.imageFilename != null %}
+                                <img src="{{ asset('images/' ~ article.imageFilename) }}" class="card-img-top" style="width: 100%; height: auto; max-height: 300px">
+                            {% endif %}
+                            <div class="card-body d-flex flex-column">
+                                <h5 class="card-title">{{ article.titre }} - {{ article.id }}</h5>
+                                <p class="card-text flex-grow-1" >{{ article.texte }}</p>
+                                <div class="d-flex">
+                                    <a href="{{ path("update_article", {"id": article.id}) }}" class="btn btn-primary flex-row">Modifier l'article</a>
+                                    <a href="{{ path("supprimer_article", {"id": article.id}) }}" class="btn btn-danger flex-row">Supprimer l'article</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    {% endfor %}
+                </div>
+			</div>
+		</main>
+	</div>
+</div>{% endblock %}
